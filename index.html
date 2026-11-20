@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Obseedyum — Kendi Minecraft sunucunu bir dakikada aç</title>
+<meta name="description" content="Obseedyum: Windows için ücretsiz Minecraft sunucu paneli. Kurulum yok, Java kendisi iner, sunucun kendi bilgisayarında, sıra beklemeden.">
+<link rel="icon" href="obsidyen.svg" type="image/svg+xml">
+<style>
+:root{--bg:#07050d;--card:#130d24;--line:#2a1f47;--text:#ece8f7;--muted:#a69cc4;--p1:#8b5cf6;--p2:#a78bfa;--pink:#e879f9;--ok:#34d399;
+  --font:"Segoe UI",system-ui,-apple-system,Roboto,sans-serif}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 var(--font);
+  background-image:radial-gradient(1100px 600px at 85% -10%,#2a124f66,transparent 60%),radial-gradient(900px 500px at -10% 40%,#1b0d3a77,transparent 60%)}
+a{color:var(--p2)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+nav{position:sticky;top:0;z-index:5;backdrop-filter:blur(10px);background:#07050dcc;border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;gap:18px;height:64px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px;color:var(--text);text-decoration:none}
+.brand svg,.brand img{width:32px;height:32px;filter:drop-shadow(0 0 10px #8b5cf688)}
+nav .links{margin-left:auto;display:flex;gap:20px}
+nav .links a{color:var(--muted);text-decoration:none;font-size:15px}
+nav .links a:hover{color:var(--text)}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 24px;border-radius:12px;font-weight:700;font-size:17px;text-decoration:none;
+  background:linear-gradient(135deg,var(--p1),var(--pink));color:#fff;box-shadow:0 10px 40px #8b5cf655;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 14px 50px #8b5cf688}
+.btn.ghost{background:transparent;border:1px solid var(--line);box-shadow:none;color:var(--text)}
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;padding:80px 0 60px}
+.eyebrow{display:inline-block;padding:5px 12px;border:1px solid #8b5cf666;border-radius:99px;color:var(--p2);font-size:13px;font-weight:600;letter-spacing:.4px}
+h1{font-size:clamp(34px,5vw,56px);line-height:1.08;margin:18px 0 16px;letter-spacing:-.5px}
+h1 em{font-style:normal;background:linear-gradient(90deg,var(--p2),var(--pink));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{color:var(--muted);font-size:19px;max-width:560px}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.small{color:var(--muted);font-size:13.5px;margin-top:12px}
+.cube{position:relative;aspect-ratio:1;max-width:380px;justify-self:center;width:100%}
+.cube svg,.cube img{display:block;width:100%;height:100%;filter:drop-shadow(0 30px 80px #8b5cf677);animation:float 6s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-14px)}}
+@media (prefers-reduced-motion:reduce){.cube svg,.cube img{animation:none}}
+section{padding:60px 0}
+h2{font-size:clamp(26px,3.4vw,36px);margin:0 0 10px}
+.sub{color:var(--muted);margin:0 0 30px;max-width:640px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{background:linear-gradient(180deg,#1a1230,#130d24);border:1px solid var(--line);border-radius:16px;padding:22px}
+.card .ic{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;background:#8b5cf622;color:var(--p2);font-size:21px;margin-bottom:12px}
+.card h3{margin:0 0 6px;font-size:18px}
+.card p{margin:0;color:var(--muted);font-size:15px}
+.steps{counter-reset:s;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.step{position:relative;padding:22px 22px 22px 70px;border:1px solid var(--line);border-radius:16px;background:#0e0a1a}
+.step::before{counter-increment:s;content:counter(s);position:absolute;left:20px;top:20px;width:36px;height:36px;border-radius:50%;
+  display:grid;place-items:center;font-weight:800;background:linear-gradient(135deg,var(--p1),var(--pink))}
+.step b{display:block;margin-bottom:4px}
+.step span{color:var(--muted);font-size:15px}
+table{width:100%;border-collapse:collapse;background:#0e0a1a;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+th,td{padding:14px 16px;text-align:left;border-bottom:1px solid var(--line);font-size:15px}
+th{color:var(--muted);font-weight:600}
+td.y{color:var(--ok);font-weight:700}
+details{border:1px solid var(--line);border-radius:12px;padding:14px 18px;background:#0e0a1a;margin-bottom:10px}
+summary{cursor:pointer;font-weight:600}
+details p{color:var(--muted);margin:10px 0 0}
+.final{text-align:center;padding:70px 22px;border:1px solid var(--line);border-radius:22px;
+  background:radial-gradient(600px 300px at 50% 0,#8b5cf633,transparent 70%),#0e0a1a;margin:40px 0 70px}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--muted);font-size:13.5px}
+@media (max-width:820px){.hero{grid-template-columns:1fr;padding-top:50px}.cube{max-width:240px;order:-1}.grid,.steps{grid-template-columns:1fr}nav .links{display:none}}
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+  <a class="brand" href="#"><img src="obsidyen.svg" alt="">Obseedyum</a>
+  <div class="links"><a href="#ozellikler">Özellikler</a><a href="#nasil">Nasıl çalışır</a><a href="#sss">SSS</a></div>
+</div></nav>
+
+<header class="wrap hero">
+  <div>
+    <span class="eyebrow">ÜCRETSİZ · WINDOWS · TÜRKÇE</span>
+    <h1>Kendi <em>Minecraft sunucunu</em> bir dakikada aç</h1>
+    <p class="lead">Sıra yok, reklam yok, kurulum yok. Obseedyum'u indir, sürümünü seç, Başlat'a bas. Sunucun kendi bilgisayarında çalışır; ne kadar RAM verirsen o kadar güçlüdür.</p>
+    <div class="cta">
+      <a class="btn" id="indir" href="#indir-bolumu">⬇ Obseedyum'u indir</a>
+      <a class="btn ghost" href="#nasil">Nasıl çalışır?</a>
+    </div>
+    <p class="small">Windows 10 / 11 · 64 bit · Python ya da Java kurmana gerek yok</p>
+  </div>
+  <div class="cube"><img src="obsidyen.svg" alt=""></div>
+</header>
+
+<section id="ozellikler"><div class="wrap">
+  <h2>Neden Obseedyum?</h2>
+  <p class="sub">Ücretsiz sunucu sitelerinde sıra beklersin, sunucu boş kalınca kapanır. Obseedyum'da sunucu senin; sen ne zaman istersen açık.</p>
+  <div class="grid">
+    <div class="card"><div class="ic">⚡</div><h3>Sıra beklemek yok</h3><p>Başlat'a basınca hemen açılır. Kimseyle sıra ve kapasite paylaşmazsın.</p></div>
+    <div class="card"><div class="ic">☕</div><h3>Java kendisi iner</h3><p>Seçtiğin sürüm hangi Java'yı istiyorsa resmi Eclipse Temurin'i kendisi indirir. Sen hiçbir şey kurmazsın.</p></div>
+    <div class="card"><div class="ic">🧱</div><h3>Bütün sürümler</h3><p>En yeni 26.x'ten eski 1.8'e kadar bütün PaperMC sürümleri. İndirilen her dosya SHA-256 ile doğrulanır.</p></div>
+    <div class="card"><div class="ic">🧠</div><h3>Akıllı RAM</h3><p>Sunucu küçük başlar, gerektiği kadar büyür, boşalınca belleği geri verir. Ölçümümüzde 4 GB sınırlı boş bir sunucu 4,5 GB yerine 1,4 GB tuttu.</p></div>
+    <div class="card"><div class="ic">🏫</div><h3>Kısıtlı ağlarda da</h3><p>Bir sürümü evde bir kez hazırla, Mojang'ın engellendiği ağlarda da internete çıkmadan açılsın.</p></div>
+    <div class="card"><div class="ic">🔒</div><h3>Güvenli varsayılan</h3><p>Panel yalnız senin bilgisayarından açılır. Başka cihazdan açmak istersen şifre koyarsın.</p></div>
+  </div>
+</div></section>
+
+<section id="plus"><div class="wrap">
+  <div class="card" style="display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center;border-color:#8b5cf677">
+    <div><span class="eyebrow">OBSEEDYUM PLUS</span>
+      <h2 style="margin-top:12px">Sunucun boştaki bilgisayarında çalışsın</h2>
+      <p class="sub" style="margin:0">Evde ikinci bir bilgisayarın mı var? Sunucuyu orada çalıştır, kendi bilgisayarından yönet. Oyun oynadığın bilgisayar kasmaz; arkadaşların sunucu bilgisayarına bağlanır. Eşleşme 6 haneli kodla, yalnız ev ağında.</p></div>
+    <div style="font-size:54px">🖥️↔🧱</div>
+  </div>
+</div></section>
+
+<section id="nasil"><div class="wrap">
+  <h2>Üç adım</h2>
+  <p class="sub">İlk sunucun birkaç dakikada hazır (ilk seferde sunucu dosyası ve gerekirse Java iner).</p>
+  <div class="steps">
+    <div class="step"><b>İndir ve aç</b><span>Obseedyum.exe'ye çift tıkla. Panel tarayıcında açılır.</span></div>
+    <div class="step"><b>Sunucunu oluştur</b><span>Ad, sürüm ve RAM seç. Oluştur'a bas.</span></div>
+    <div class="step"><b>Başlat ve oyna</b><span>Başlat'a bas. Panelde yazan adresi arkadaşlarınla paylaş.</span></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>Karşılaştır</h2>
+  <p class="sub">Dürüst tablo: Obseedyum'da sunucu senin bilgisayarında çalışır, yani bilgisayarın açıkken açıktır.</p>
+  <table>
+    <tr><th></th><th>Obseedyum</th><th>Ücretsiz sunucu siteleri</th></tr>
+    <tr><td>Sıra bekleme</td><td class="y">Yok</td><td>Yoğun saatlerde var</td></tr>
+    <tr><td>RAM</td><td class="y">Bilgisayarının verebildiği kadar</td><td>Sınırlı</td></tr>
+    <tr><td>Boşken kapanma</td><td class="y">Sen kapatana kadar açık</td><td>Oyuncu yoksa kapanır</td></tr>
+    <tr><td>Bilgisayarın kapalıyken</td><td>Sunucu da kapalı</td><td class="y">Çalışmaya devam eder</td></tr>
+    <tr><td>Ücret</td><td class="y">Ücretsiz</td><td>Ücretsiz / ücretli</td></tr>
+  </table>
+</div></section>
+
+<section id="sss"><div class="wrap">
+  <h2>Sık sorulanlar</h2>
+  <details><summary>Arkadaşlarım nasıl bağlanır?</summary><p>Aynı evdeyseniz panelde yazan "Aynı ağdan" adresini kullanırlar. Farklı evlerden bağlanmak için şu an modem ayarından port açmak ya da bir tünel kullanmak gerekiyor; bunu tek tıkla yapan özellik yolda.</p></details>
+  <details><summary>Bilgisayarıma zarar verir mi?</summary><p>Hayır. Obseedyum yalnız kendi klasörüne (%APPDATA%\Obseedyum) yazar. Java'yı da kendi klasörüne indirir, sistemine kurmaz.</p></details>
+  <details><summary>"Windows bilgisayarınızı korudu" uyarısı çıktı</summary><p>Yeni ve imzasız programlarda çıkar. "Ek bilgi" → "Yine de çalıştır" de.</p></details>
+  <details><summary>Ne kadar RAM gerekir?</summary><p>3-5 arkadaşla oynamak için sunucuya 2-4 GB vermek yeterli. Bilgisayarında 8 GB ve üstü RAM olması iyi olur.</p></details>
+  <details><summary>Resmi bir Minecraft ürünü mü?</summary><p>Hayır. Obseedyum bağımsız bir projedir; Mojang ya da Microsoft ile bağlantısı yoktur. Sunucu yazılımı PaperMC'dir.</p></details>
+</div></section>
+
+<div class="wrap"><div class="final" id="indir-bolumu">
+  <h2>Sunucun bir tık uzakta</h2>
+  <p class="sub" style="margin:0 auto 26px">Ücretsiz. Kurulum yok. Windows 10 / 11.</p>
+  <a class="btn" id="indir2" href="#">⬇ Obseedyum'u indir</a>
+  <p class="small" id="surum"></p>
+</div></div>
+
+<footer><div class="wrap">Obseedyum bağımsız bir projedir. Minecraft, Mojang AB'nin markasıdır; Obseedyum'un Mojang ya da Microsoft ile bağlantısı yoktur.</div></footer>
+<script>
+// İndirme: GitHub Pages'te (<kullanıcı>.github.io/<depo>/) aynı deponun en son sürümündeki zip.
+(function () {
+  const host = location.hostname, part = location.pathname.split("/").filter(Boolean)[0];
+  const user = host.endsWith(".github.io") ? host.split(".")[0] : "";
+  const url = user && part ? `https://github.com/${user}/${part}/releases/latest/download/Obseedyum.zip` : "";
+  const a = document.getElementById("indir2");
+  if (url) { a.href = url; document.getElementById("surum").textContent = "Obseedyum.zip · yaklaşık 44 MB · Windows 10/11 64 bit"; }
+  else { a.textContent = "Çok yakında"; a.removeAttribute("href"); }
+})();
+</script>
+</body>
+</html>
